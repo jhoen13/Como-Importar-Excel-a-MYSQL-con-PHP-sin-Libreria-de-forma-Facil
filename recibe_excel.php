@@ -1,8 +1,8 @@
 <?php
 require('config.php');
-$tipo       = $_FILES['dataCliente']['type'];
-$tamanio    = $_FILES['dataCliente']['size'];
-$archivotmp = $_FILES['dataCliente']['tmp_name'];
+$tipo       = $_FILES['produc']['type'];
+$tamanio    = $_FILES['produc']['size'];
+$archivotmp = $_FILES['produc']['tmp_name'];
 $lineas     = file($archivotmp);
 
 $i = 0;
@@ -13,30 +13,51 @@ foreach ($lineas as $linea) {
 
     if ($i != 0) {
 
-        $datos = explode(";", $linea);
-       
-        $nombre                = !empty($datos[0])  ? ($datos[0]) : '';
-		$correo                = !empty($datos[1])  ? ($datos[1]) : '';
-        $celular               = !empty($datos[2])  ? ($datos[2]) : '';
-       
-    $insertar = "INSERT INTO clientes( 
-            nombre,
-			correo,
-            celular
+        $datos = explode(",", $linea);
+
+        $nombre = !empty($datos[0])  ? ($datos[0]) : '';
+        $descrip = !empty($datos[1])  ? ($datos[1]) : '';
+        $prec_com = !empty($datos[2])  ? ($datos[2]) : '';
+        $dispo = !empty($datos[3])  ? ($datos[3]) : '';
+        $cate = !empty($datos[4])  ? ($datos[4]) : '';
+        $canti = !empty($datos[5])  ? ($datos[5]) : '';
+        $embala = !empty($datos[6])  ? ($datos[6]) : '';
+        $foto = !empty($datos[7])  ? ($datos[7]) : '';
+        $prec_ven = !empty($datos[8])  ? ($datos[8]) : '';
+        $docu = !empty($datos[9])  ? ($datos[9]) : '';
+
+        $insertar = "INSERT INTO productos( 
+            nom_produc,
+            descrip,
+            precio_compra,
+            disponibles,
+            id_categoria,
+            cantidad,
+            id_embala,
+            foto,
+            precio_ven,
+            documento
         ) VALUES(
             '$nombre',
-			'$correo',
-            '$celular'
+            '$descrip',
+            '$prec_com',
+            '$dispo',
+            '$cate',
+            '$canti',
+            '$embala',
+            '$foto',
+            '$prec_ven',
+            '$docu'
         )";
         mysqli_query($con, $insertar);
     }
 
-      echo '<div>'. $i. "). " .$linea.'</div>';
+    echo '<div>' . $i . "). " . $linea . '</div>';
     $i++;
 }
 
 
-  echo '<p style="text-aling:center; color:#333;">Total de Registros: '. $cantidad_regist_agregados .'</p>';
+echo '<p style="text-aling:center; color:#333;">Total de Registros: ' . $cantidad_regist_agregados . '</p>';
 
 ?>
 

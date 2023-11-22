@@ -1,0 +1,4 @@
+"nom_produc","descrip","precio_compra","disponibles","id_categoria","cantidad","id_embala","foto","precio_ven","documento"
+mango,paquete grande,3000.00,10,2,1,1,pastas.png,3500.00,1106632118
+manzana,roja grande,1500.00,5,1,1,1,manzana.png,2200.00,1106632118
+ramen,pasta,2500.00,15,2,1,1,producto_1700061741.png,3000.00,1106632525
